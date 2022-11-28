@@ -1,3 +1,4 @@
+PASSED
 project brings common data between songs table and artists table 
 fact table ---->songplays
 dimension tables 
