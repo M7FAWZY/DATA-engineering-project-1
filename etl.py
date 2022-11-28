@@ -51,7 +51,7 @@ def process_log_file(cur, filepath):
     users_df = df[['userId','firstName','lastName','gender','level']]
 
     # insert user records
-    for i, row in user_df.iterrows():
+    for i, row in users_df.iterrows():
         cur.execute(user_table_insert,row)
 
     # insert songplay records
@@ -68,7 +68,7 @@ def process_log_file(cur, filepath):
 
         # insert songplay record
         songplays_data = ( row.ts, row.userId, row.level, songid, artistid, row.sessionId, row.location, row.userAgent)
-        cur.execute(songplay_table_insert, songplays_data)
+        cur.execute(songplay_table_insert,songplays_data)
 
 
 def process_data(cur, conn, filepath, func):
@@ -102,4 +102,5 @@ def main():
 
 if __name__ == "__main__":
     main()
-    print("n\ ok \n")
+    print("\n")
+    print("ok\n")

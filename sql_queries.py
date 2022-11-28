@@ -12,17 +12,16 @@ time_table_drop = "DROP TABLE IF EXISTS time"
 
 
 songplay_table_create = (""" CREATE TABLE IF NOT EXISTS songplays(
-songplay_id int CONSTRAINT songplay_pk PRIMARY KEY ,
+songplay_id serial CONSTRAINT songplay_pk PRIMARY KEY ,
 start_time timestamp NOT NULL REFERENCES time (start_time) ,
-user_id varchar NOT NULL REFERENCES users (user_id),
+user_id int NOT NULL REFERENCES users (user_id),
 level varchar NOT NULL ,
 song_id varchar  REFERENCES songs (song_id),
 artist_id varchar  REFERENCES artists (artist_id) ,
 session_id int NOT NULL ,
 location text,
 user_agent text
-)
-""")
+)""")
 #start_time timestamptz CONSTRAINT time_pk PRIMARY KEY REFERENCES songplays (start_time),
 #time_table_create = (""" CREATE TABLE IF NOT EXISTS time(
 #start_time timestamp CONSTRAINT time_pk PRIMARY KEY ,
@@ -36,7 +35,7 @@ user_agent text
 #""")
 
 user_table_create = (""" CREATE TABLE IF NOT EXISTS users(
-user_id varchar CONSTRAINT user_pk PRIMARY KEY ,
+user_id int CONSTRAINT user_pk PRIMARY KEY ,
 first_name varchar,
 last_name varchar,
 gender varchar,
@@ -91,9 +90,9 @@ weekday varchar NOT NULL
 # INSERT RECORDS
 #
 songplay_table_insert = (""" INSERT INTO songplays (
-    songplay_id, start_time, user_id, level, song_id, artist_id, 
+    start_time, user_id, level, song_id, artist_id, 
     session_id, location, user_agent) 
-    VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)    
+    VALUES (%s, %s, %s, %s, %s, %s, %s, %s)    
     ON CONFLICT (songplay_id) DO NOTHING;
 """)
 #
